@@ -1,0 +1,7 @@
+@extends('layouts.admin')
+@section('title','Dashboard') @section('page-title','Dashboard') @section('eyebrow','RINGKASAN TOKO')
+@section('content')
+<div class="welcome-card"><div><span class="kicker">Halo, {{ auth()->user()->name }} ♡</span><h2>Update pricelist tanpa ribet.</h2><p>Harga berubah hari ini? Langsung buka Quick Edit dan simpan dari HP.</p></div><a class="button primary" href="{{ route('admin.products.quick-edit') }}">✎ Quick Edit Harga</a></div>
+<div class="stat-grid"><div class="stat-card"><span>Produk</span><b>{{ $stats['products'] }}</b><small>total tersimpan</small></div><div class="stat-card"><span>Aktif</span><b>{{ $stats['active'] }}</b><small>tampil di pricelist</small></div><div class="stat-card"><span>Sold Out</span><b>{{ $stats['soldOut'] }}</b><small>varian tidak ready</small></div><div class="stat-card"><span>Kategori</span><b>{{ $stats['categories'] }}</b><small>kelompok produk</small></div></div>
+<div class="section-card"><div class="section-head"><div><span class="kicker">TERAKHIR DIUBAH</span><h2>Produk terbaru</h2></div><a href="{{ route('admin.products.index') }}">Lihat semua →</a></div><div class="simple-list">@forelse($recent as $product)<a href="{{ route('admin.products.edit',$product) }}"><span class="avatar-mini">{{ mb_strtoupper(mb_substr($product->name,0,1)) }}</span><div><b>{{ $product->name }}</b><small>Diperbarui {{ $product->updated_at->diffForHumans() }}</small></div><i>›</i></a>@empty<div class="admin-empty">Belum ada produk.</div>@endforelse</div></div>
+@endsection
